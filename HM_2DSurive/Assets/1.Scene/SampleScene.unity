@@ -13151,19 +13151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782f44b06de2aa941a39e11a64b8f344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spwanPoint:
-  - {fileID: 1677785394}
-  - {fileID: 1235755533}
-  - {fileID: 202563919}
-  - {fileID: 588976415}
-  - {fileID: 1954230240}
-  - {fileID: 1666499950}
-  - {fileID: 628181746}
-  - {fileID: 432656330}
-  - {fileID: 1346956807}
-  - {fileID: 1335961675}
-  - {fileID: 416582164}
-  - {fileID: 1662340006}
+  spwanPoint: []
+  spwanTime: 0
 --- !u!1 &588976414
 GameObject:
   m_ObjectHideFlags: 0
@@ -30304,7 +30293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 656787904}
-  enemyPoolMgr: {fileID: 0}
+  enemyPoolMgr: {fileID: 861047869}
 --- !u!4 &1111469583
 Transform:
   m_ObjectHideFlags: 0
