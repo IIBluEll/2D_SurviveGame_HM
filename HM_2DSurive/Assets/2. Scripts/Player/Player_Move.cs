@@ -1,3 +1,6 @@
+//Player_Move.cs
+// 플레이어의 이동과 애니메이션을 담당하는 스크립트
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
