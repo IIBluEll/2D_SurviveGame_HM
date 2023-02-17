@@ -7,7 +7,10 @@ using UnityEngine;
 
 public class EnemySpwaner : MonoBehaviour
 {
+    public SpwanData[] spwanDatas;
     public Transform[] spwanPoint;
+    
+    int level; // 스테이지 레벨 변수
 
     float timer;
     public float spwanTime; // 스폰 시간 조절용
@@ -19,8 +22,12 @@ public class EnemySpwaner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        
-        if(timer > spwanTime)
+
+        level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spwanDatas.Length - 1); // 게임시간 / 10을 함으로써 10초마다 level이 1씩 올라감 
+                                                                                                         // Mathf.FloorToTint => 소수점 자리를 모두 날림
+                                                                                                         // Mathf.Min(A,B) => A와 B 둘 중 더 작은 값을 반환
+
+        if(timer > (spwanDatas[level].spwanTIme))
         {
             timer = 0;
             Spawn();
@@ -29,10 +36,20 @@ public class EnemySpwaner : MonoBehaviour
 
     void Spawn()
     {
-       GameObject enemy = GameManager.instance.enemyPoolMgr.Get(Random.Range(0,2)); // EnemyPoolMgr에서 저장된 프리펩중 랜덤으로 하나를 선택
-                                                                                    // 비활성화 되어 있는 오브젝트가 있을 경우 활성화
-                                                                                    // 비활성화 되어 있는 오브젝트가 없을 경우 새로 생성
+       GameObject enemy = GameManager.instance.enemyPoolMgr.Get(0); 
 
         enemy.transform.position = spwanPoint[Random.Range(1, spwanPoint.Length)].position;
+
+        enemy.GetComponent<EnemyMove>().Init(spwanDatas[level]);
     }
+}
+
+// 적들의 데이터를 세팅하는 클래스
+[System.Serializable]
+public class SpwanData
+{
+    public float spwanTIme; // 몬스터의 스폰 시간
+    public int spriteType; // 스프라이트 타입에 따라 적들이 달라짐
+    public int health;      // 몬스터의 현재체력
+    public float speed;     // 몬스터의 속도
 }

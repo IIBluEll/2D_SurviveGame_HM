@@ -8,20 +8,36 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     public float speed;
+    public float health;
+    public float maxHealth;
+
+    public RuntimeAnimatorController[] animCon;
     public Rigidbody2D target;
 
-    bool isLive = true;
+    bool isLive;
 
     Rigidbody2D enemyRigid;
     SpriteRenderer enemySpriter;
+    Animator anim;
+
+    public void Init(SpwanData data)
+    {
+        anim.runtimeAnimatorController = animCon[data.spriteType];
+        speed = data.speed;
+        maxHealth = data.health;
+        health = data.health;
+    }
 
     private void OnEnable()
     {
+        isLive = true;
+        health = maxHealth;
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
     }
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         enemyRigid = GetComponent<Rigidbody2D>();
         enemySpriter = GetComponent<SpriteRenderer>();
     }
