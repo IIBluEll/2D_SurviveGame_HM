@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8431981221640923487}
   - component: {fileID: 8431981221640923483}
   - component: {fileID: 8431981221640923482}
-  - component: {fileID: 8431981221640923460}
+  - component: {fileID: 4915609985835727601}
   - component: {fileID: 8431981221640923461}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy0
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.7, y: 0.9}
   m_Direction: 0
---- !u!114 &8431981221640923460
+--- !u!114 &4915609985835727601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8431981221640923486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fd7bfa45dfcbcd4a96696cef006f6f0, type: 3}
+  m_Script: {fileID: 11500000, guid: df6465b4c20977d4d877f7f894c6b3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8431981222397701989}
   - component: {fileID: 8431981222397701990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

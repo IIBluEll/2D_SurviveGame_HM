@@ -1,4 +1,4 @@
-//Player_Move.cs
+//Player.cs
 // 플레이어의 이동과 애니메이션을 담당하는 스크립트
 
 using System.Collections;
@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player_Move : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public Vector2 inputVec;    // InputSystem에서 받은 Value값을 저장할 Vector2 변수
     public float speed;
+
+    public Scanner scanner;
 
     Rigidbody2D playerRigid;
     SpriteRenderer playerSprite;
@@ -17,6 +19,8 @@ public class Player_Move : MonoBehaviour
 
     private void Awake()
     {
+        scanner = this.GetComponent<Scanner>();
+
         playerRigid = this.GetComponent<Rigidbody2D>();
         playerSprite = this.GetComponent<SpriteRenderer>();
         playerAnim = this.GetComponent<Animator>();

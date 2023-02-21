@@ -36,11 +36,11 @@ public class EnemySpwaner : MonoBehaviour
 
     void Spawn()
     {
-       GameObject enemy = GameManager.instance.enemyPoolMgr.Get(0); 
+       GameObject enemy = GameManager.instance.PoolMgr.Get(0); 
 
         enemy.transform.position = spwanPoint[Random.Range(1, spwanPoint.Length)].position;
 
-        enemy.GetComponent<EnemyMove>().Init(spwanDatas[level]);
+        enemy.GetComponent<Enemy>().Init(spwanDatas[level]);
     }
 }
 
