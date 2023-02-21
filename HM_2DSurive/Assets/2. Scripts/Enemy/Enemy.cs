@@ -1,11 +1,12 @@
 // EnemyMove.cs
-// 적이 플레이어를 추적하는 스크립트
+// Enemy를 관리하는 스크립트
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float speed;
     public float health;
@@ -58,5 +59,30 @@ public class EnemyMove : MonoBehaviour
         if (!isLive) return;
 
         enemySpriter.flipX = target.position.x < enemyRigid.position.x; // 플레이어와 적의 X축 비교를 통해 flipX를 바꾼다
+    }
+
+    // Enemy가 무기와 충돌했을 때
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
+
+        health -= collision.GetComponent<Bullet>().damage;
+
+        if(health > 0)
+        {
+
+        }
+        else
+        {
+            Dead();
+        }
+    }
+
+    private void Dead()
+    {
+        #region 임시 죽음 코드
+        gameObject.SetActive(false);
+        #endregion
     }
 }
