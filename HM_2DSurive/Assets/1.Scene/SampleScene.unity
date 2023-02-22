@@ -289,7 +289,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 75066365bb256824ba36360a307526c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30327,6 +30327,10 @@ MonoBehaviour:
   gameTime: 0
   player: {fileID: 656787904}
   PoolMgr: {fileID: 861047869}
+  level: 0
+  kill: 0
+  exp: 0
+  nextExp: 0a0000001e0000003c0000006400000096000000d200000068010000c201000058020000
 --- !u!4 &1111469583
 Transform:
   m_ObjectHideFlags: 0
@@ -39020,7 +39024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1762683664
 Transform:
   m_ObjectHideFlags: 0
@@ -68794,6 +68798,10 @@ PrefabInstance:
     - target: {fileID: 6070845857608977160, guid: 78e3d1ff86ea9084d813400a8e06272c, type: 3}
       propertyPath: m_Name
       value: Player0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070845857608977160, guid: 78e3d1ff86ea9084d813400a8e06272c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6070845857608977160, guid: 78e3d1ff86ea9084d813400a8e06272c, type: 3}
       propertyPath: m_TagString
