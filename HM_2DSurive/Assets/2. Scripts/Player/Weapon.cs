@@ -25,10 +25,34 @@ public class Weapon : MonoBehaviour
 
         if (id == 0)
             Batch();
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        // Basic Set
+
+        name = "Weapon " + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property Set
+
+        id = data.itemId;
+        damgage = data.baseDamge;
+        count = data.baseCount;
+
+        for(int i = 0; i < GameManager.instance.PoolMgr.Prefebs.Length; i++)
+        {
+            if (data.projectile == GameManager.instance.PoolMgr.Prefebs[i])
+            {
+                prefabID = i;
+                break;
+            }
+        }
+
         switch(id)
         {
             
@@ -44,6 +68,8 @@ public class Weapon : MonoBehaviour
                 break;
              
         }
+
+        player.BroadcastMessage("ApplyGear",SendMessageOptions.DontRequireReceiver);
     }
 
     void Batch()
@@ -80,10 +106,9 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
-        player = GetComponentInParent<Player>();
-        Init();
+        player = GameManager.instance.player;
     }
 
     private void Update()
