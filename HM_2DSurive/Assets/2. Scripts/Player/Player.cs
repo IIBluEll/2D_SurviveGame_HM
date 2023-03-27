@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     public Scanner scanner;
 
+    public Hand_Ctl[] hands;
+
     Rigidbody2D playerRigid;
     SpriteRenderer playerSprite;
     Animator playerAnim;
@@ -24,6 +26,8 @@ public class Player : MonoBehaviour
         playerRigid = this.GetComponent<Rigidbody2D>();
         playerSprite = this.GetComponent<SpriteRenderer>();
         playerAnim = this.GetComponent<Animator>();
+
+        hands = GetComponentsInChildren<Hand_Ctl>(true);    // 처음에 손이 비활성화 되어있기 때문에 true 추가
     }
 
     private void FixedUpdate()
