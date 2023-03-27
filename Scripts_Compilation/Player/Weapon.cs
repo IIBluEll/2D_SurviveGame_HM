@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     public int id; // 무기의 ID 변수
     public int prefabID;
 
-    public float damgage;   // 무기의 데미지
+    public float damage;   // 무기의 데미지
     public float speed;     // 무기의 회전속도 // 원거리의 경우 발사속도
     public int count;       // 무기의 갯수
 
@@ -20,15 +20,39 @@ public class Weapon : MonoBehaviour
 
     public void LevelUP(float damage, int count) // 무기 레벨업
     {
-        this.damgage += damage;
+        this.damage += damage;
         this.count += count;
 
         if (id == 0)
             Batch();
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        // Basic Set
+
+        name = "Weapon " + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property Set
+
+        id = data.itemId;
+        damage = data.baseDamge;
+        count = data.baseCount;
+
+        for(int i = 0; i < GameManager.instance.PoolMgr.Prefebs.Length; i++)
+        {
+            if (data.projectile == GameManager.instance.PoolMgr.Prefebs[i])
+            {
+                prefabID = i;
+                break;
+            }
+        }
+
         switch(id)
         {
             
@@ -44,6 +68,13 @@ public class Weapon : MonoBehaviour
                 break;
              
         }
+
+        // Hand Set
+        Hand_Ctl hand = player.hands[(int)data.itemType]; // <ItemData.cs> public enum ItemType { Melee, Range, Glove, Shoe, Heal
+        hand.spriter.sprite = data.hand;    // 스크립터블 오브젝트에서 미리 스프라이트 설정해둠
+        hand.gameObject.SetActive(true);    // 무기 생성시 Hand 오브젝트 활성화
+
+        player.BroadcastMessage("ApplyGear",SendMessageOptions.DontRequireReceiver);
     }
 
     void Batch()
@@ -74,16 +105,15 @@ public class Weapon : MonoBehaviour
             bullet.Rotate(rotVect);
             bullet.Translate(bullet.up * 1.5f, Space.World); // Space.World 기준 플레이어와 1.5f 거리만큼 이동
 
-            bullet.GetComponent<Bullet>().Init(damgage, -1,Vector3.zero); // (Damgae,Per) 데미지와 관통갯수를 전달 ==> -1은 무한관통
+            bullet.GetComponent<Bullet>().Init(damage, -1,Vector3.zero); // (Damgae,Per) 데미지와 관통갯수를 전달 ==> -1은 무한관통
 
 
         }
     }
 
-    private void Start()
+    private void Awake()
     {
-        player = GetComponentInParent<Player>();
-        Init();
+        player = GameManager.instance.player;
     }
 
     private void Update()
@@ -135,6 +165,6 @@ public class Weapon : MonoBehaviour
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.up,dir); // 총알을 타겟 방향으로 z축 기준으로 회전
 
-        bullet.GetComponent<Bullet>().Init(damgage, count, dir); // (Damgae,Per,방향) 데미지와 관통갯수,방향을 전달
+        bullet.GetComponent<Bullet>().Init(damage, count, dir); // (Damgae,Per,방향) 데미지와 관통갯수,방향을 전달
     }
 }
